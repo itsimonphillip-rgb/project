@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Curriculum | Elysium Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-uppercase d-flex align-items-center" href="index.html">
+                <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=80&auto=format&fit=crop&q=60" alt="Academy Logo" class="logo-img me-2">
+                <span><span class="text-warning">Elysium</span> Academy</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="aboutus.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="academics.html">Academics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admission.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-warning btn-sm text-dark fw-bold px-3 round-pill shadow-sm" href="/School Portal/portal-login.html">Portal Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-header d-flex align-items-center curriculum-header-bg">
+        <div class="page-header-overlay"></div>
+        <div class="container position-relative z-3 text-center text-white">
+            <h1 class="fw-bold display-5 mb-2">Subject Scheme of Work</h1>
+            <p class="lead small text-warning text-uppercase tracking-wider">A comprehensive guide to our academic syllabi and credit systems</p>
+        </div>
+    </header>
+
+    <main class="py-5">
+        <div class="container">
+            
+            <div class="card border-0 shadow-sm rounded-4 p-4 mb-5 bg-white">
+                <div class="row align-items-center">
+                   <div class="row">
+                    <!-- Right Area: Junior & Senior Secondary Structured Curriculum -->
+                <div class="col-lg-12">
+                    
+                    <!-- Level Selection Interface Pills -->
+                    <ul class="nav nav-pills nav-justified bg-white border rounded-4 p-2 mb-4 shadow-sm" id="curriculumLevelTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-bold py-3 text-uppercase tracking-wider rounded-3" id="jss-tab" data-bs-toggle="pill" data-bs-target="#juniorSecondaryArea" type="button" role="tab" aria-selected="true">
+                                <i class="bi bi-backpack2-fill me-2"></i> Junior Secondary (JSS 1-3)
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-bold py-3 text-uppercase tracking-wider rounded-3" id="sss-tab" data-bs-toggle="pill" data-bs-target="#seniorSecondaryArea" type="button" role="tab" aria-selected="false">
+                                <i class="bi bi-mortarboard-fill me-2"></i> Senior Secondary (SSS 1-3)
+                            </button>
+                        </li>
+                    </ul>
+
+                    <!-- Tabs Display Viewport Wrapper -->
+                    <div class="tab-content" id="curriculumLevelContent">
+                        
+                        <!-- ================= JUNIOR SECONDARY BLOCK ================= -->
+                        <div class="tab-pane fade show active" id="juniorSecondaryArea" role="tabpanel" aria-labelledby="jss-tab">
+                            <div class="accordion accordion-flush shadow-sm rounded-4 overflow-hidden border bg-white" id="jssAccordion">
+                                
+                                <!-- JSS Core Group 1 -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#jssCore" aria-expanded="true">
+                                            <i class="bi bi-star-fill text-danger me-2 fs-5"></i> Fundamental Core Subjects
+                                        </button>
+                                    </h2>
+                                    <div id="jssCore" class="accordion-collapse collapse show" data-bs-parent="#jssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <p class="small text-muted mb-4">Mandatory building blocks designed to establish linguistic, mathematical, and logical literacy skills across the first 3 years of basic education.</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-danger shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">English Studies</h6>
+                                                        <p class="fs-xs text-muted mb-0">Grammar mechanics, vocabulary development, reading comprehension, composition, and introductory literature prose.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-danger shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Mathematics</h6>
+                                                        <p class="fs-xs text-muted mb-0">Number bases, fractions, basic equations, plane geometry, and data collection fundamentals.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- JSS Core Group 2 -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#jssStem" aria-expanded="false">
+                                            <i class="bi bi-cpu-fill text-warning me-2 fs-5"></i> Basic Science & Technology (BST)
+                                        </button>
+                                    </h2>
+                                    <div id="jssStem" class="accordion-collapse collapse" data-bs-parent="#jssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <p class="small text-muted mb-4">An integrated scientific track preparing young minds for specialized engineering, biological, and system modules later on.</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-warning shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Basic Science</h6>
+                                                        <p class="fs-xs text-muted mb-0">Living and non-living properties, environmental changes, kinetic energy states, and health/disease hygiene protocols.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-warning shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Basic Technology</h6>
+                                                        <p class="fs-xs text-muted mb-0">Identification of wood/metals, simple tool mechanisms, geometric shapes drawing, and maintenance systems.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-warning shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Computer Studies / Information Tech</h6>
+                                                        <p class="fs-xs text-muted mb-0">Evolution of computing, system hardware parts, operating systems basics, and processing text files.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-warning shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Physical & Health Education (PHE)</h6>
+                                                        <p class="fs-xs text-muted mb-0">Athletics rules, individual and team games, community safety, first aid layouts, and nutritional systems.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- JSS Core Group 3 -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#jssHumanities" aria-expanded="false">
+                                            <i class="bi bi-people-fill text-primary-blue me-2 fs-5"></i> Religion & National Values (RNV)
+                                        </button>
+                                    </h2>
+                                    <div id="jssHumanities" class="accordion-collapse collapse" data-bs-parent="#jssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <p class="small text-muted mb-4">Focused on establishing national identity, deep moral grounding, historical awareness, and healthy civic values.</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-primary-blue shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Civic Education</h6>
+                                                        <p class="fs-xs text-muted mb-0">National symbols, structural pillars of society, constitutional guidelines, and agency rules.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-primary-blue shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Social Studies</h6>
+                                                        <p class="fs-xs text-muted mb-0">Family integration scales, civic behaviors, cultural diversity management, and security threats training.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-primary-blue shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Christian Religious Studies / IRS</h6>
+                                                        <p class="fs-xs text-muted mb-0">Biblical/Quranic histories, moral choice systems, obey rules values, and ancestral frameworks.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-primary-blue shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Security Education</h6>
+                                                        <p class="fs-xs text-muted mb-0">Emergency alert protocols, local community reporting paths, safety routines, and protective habits.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- JSS Core Group 4 -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#jssVocational" aria-expanded="false">
+                                            <i class="bi bi-tools text-success me-2 fs-5"></i> Pre-Vocational & Cultural Studies
+                                        </button>
+                                    </h2>
+                                    <div id="jssVocational" class="accordion-collapse collapse" data-bs-parent="#jssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <p class="small text-muted mb-4">Hands-on exploratory tracks to nurture early entrepreneurship, food security awareness, and design aesthetics.</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-success shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Agricultural Science</h6>
+                                                        <p class="fs-xs text-muted mb-0">Classification of crops, farm tools safety, soil components structure, and basic vegetable garden operations.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-success shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Home Economics</h6>
+                                                        <p class="fs-xs text-muted mb-0">Puberty biology markers, basic textiles/stitches, kitchen utensils usage, and home safety metrics.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-success shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Cultural & Creative Arts (CCA)</h6>
+                                                        <p class="fs-xs text-muted mb-0">Basic music notations, local canvas painting designs, theater elements, and indigenous crafts design.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-success shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">French / Native Edo Language</h6>
+                                                        <p class="fs-xs text-muted mb-0">Everyday greetings dialogue, sentence syntax structure, cultural histories, and fundamental vocabulary paths.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- JSS Premium Track: Digital Literacy & Innovation -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#jssInnovation" aria-expanded="false">
+                                            <i class="bi bi-cpu text-dark me-2 fs-5"></i> Digital Tech & Creative Innovation (Junior)
+                                        </button>
+                                    </h2>
+                                    <div id="jssInnovation" class="accordion-collapse collapse" data-bs-parent="#jssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <p class="small text-muted mb-4">Early-stage immersive modules focusing on digital expression, computational thinking, and building foundational skills for the modern creator economy.</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-dark shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Foundations of Web Design</h6>
+                                                        <p class="fs-xs text-muted mb-0">Structuring clean content using semantic HTML tags, styling pages with CSS properties, and designing responsive webpage structures.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-dark shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Algorithmic Problem Solving</h6>
+                                                        <p class="fs-xs text-muted mb-0">Breaking down complex problems, understanding conditional loops, variables, and logic flow charts through block coding.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-dark shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Introduction to Logo & Visual Branding</h6>
+                                                        <p class="fs-xs text-muted mb-0">Understanding color theory, typography, scaling layouts, and creating clean, unique corporate or catering identity vector assets.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+
+                        
+
+                        <!-- ================= SENIOR SECONDARY BLOCK ================= -->
+                        <div class="tab-pane fade" id="seniorSecondaryArea" role="tabpanel" aria-labelledby="sss-tab">
+                            <div class="accordion accordion-flush shadow-sm rounded-4 overflow-hidden border bg-white" id="sssAccordion">
+                                
+                                <!-- SSS Core Compulsory -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#sssCore" aria-expanded="true">
+                                            <i class="bi bi-star-fill text-danger me-2 fs-5"></i> Cross-Cutting Core (NERDC Mandated)
+                                        </button>
+                                    </h2>
+                                    <div id="sssCore" class="accordion-collapse collapse show" data-bs-parent="#sssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <p class="small text-muted mb-4">Compulsory structural subjects that every Senior Secondary track student must sit for in WAEC or NECO examinations.</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-danger shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">English Language</h6>
+                                                        <p class="fs-xs text-muted mb-0">Lexis and structure patterns, letter styles, comprehension abstracts, and oral phonetics.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-danger shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">General Mathematics</h6>
+                                                        <p class="fs-xs text-muted mb-0">Algebra calculations, trigonometry, circular matrices, sets, and probabilistic distribution charts.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-danger shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Civic Education</h6>
+                                                        <p class="fs-xs text-muted mb-0">Human rights laws, values education, defense mechanisms, and national development frameworks.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-danger shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Data Processing</h6>
+                                                        <p class="fs-xs text-muted mb-0">Information index methods, spreadsheet data arrays, network tools, and database architecture basics.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SSS Science Specialty -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#sssScience" aria-expanded="false">
+                                            <i class="bi bi-flask-fill text-warning me-2 fs-5"></i> Science & Mathematics Specialization
+                                        </button>
+                                    </h2>
+                                    <div id="sssScience" class="accordion-collapse collapse" data-bs-parent="#sssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-warning shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Biology</h6>
+                                                        <p class="fs-xs text-muted mb-0">Cell architecture, respiratory pathways, ecosystem mechanics, and genetics inheritance labs.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-warning shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Chemistry</h6>
+                                                        <p class="fs-xs text-muted mb-0">Gas behaviors, periodic patterns, volumetric lab titrations, and chemical kinetics calculations.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-warning shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Physics</h6>
+                                                        <p class="fs-xs text-muted mb-0">Vector dynamics, waves mechanics, electrical resistors logs, and atomic radiation experiments.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-warning shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Further Mathematics</h6>
+                                                        <p class="fs-xs text-muted mb-0">Calculus integrations, coordinate vectors, binomial curves, and complex number parameters.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SSS Arts/Humanities Specialty -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#sssArts" aria-expanded="false">
+                                            <i class="bi bi-journal-bookmark-fill text-primary-blue me-2 fs-5"></i> Humanities & Creative Arts Specialization
+                                        </button>
+                                    </h2>
+                                    <div id="sssArts" class="accordion-collapse collapse" data-bs-parent="#sssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-primary-blue shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Literature-in-English</h6>
+                                                        <p class="fs-xs text-muted mb-0">African and non-African drama critiques, core poetry breakdowns, and textual analysis methods.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-primary-blue shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Government</h6>
+                                                        <p class="fs-xs text-muted mb-0">State sovereignty theories, pre-colonial operations, and international diplomatic alliance blocks.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-primary-blue shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Christian Religious Studies / IRS</h6>
+                                                        <p class="fs-xs text-muted mb-0">Prophetic mandates, covenant histories, and ethical behavior systems.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SSS Commercial Specialty -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#sssCommercial" aria-expanded="false">
+                                            <i class="bi bi-graph-up-arrow text-success me-2 fs-5"></i> Commercial & Business Specialization
+                                        </button>
+                                    </h2>
+                                    <div id="sssCommercial" class="accordion-collapse collapse" data-bs-parent="#sssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-success shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Financial Accounting</h6>
+                                                        <p class="fs-xs text-muted mb-0">Double-entry books logic, manufacturing balance matrices, and depreciation schedules tracking.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-success shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Economics</h6>
+                                                        <p class="fs-xs text-muted mb-0">Elasticity computations, market production costs, national income equations, and trade parameters.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-success shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Commerce</h6>
+                                                        <p class="fs-xs text-muted mb-0">Customs operations, multi-channel marketing, credit structures, and stock market functions.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SSS Entrepreneurial Trade -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#sssTrade" aria-expanded="false">
+                                            <i class="bi bi-tools text-secondary me-2 fs-5"></i> Vocational Trades (Select Exactly One)
+                                        </button>
+                                    </h2>
+                                    <div id="sssTrade" class="accordion-collapse collapse" data-bs-parent="#sssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <p class="small text-muted mb-4">Mandated by NERDC guidelines to drive independent vocational capability directly by graduation.</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-secondary shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Catering Craft Practice</h6>
+                                                        <p class="fs-xs text-muted mb-0">Hospitality management layout, professional hygiene steps, menu structures, and commercial costing logic.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-secondary shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Bookkeeping / Marketing</h6>
+                                                        <p class="fs-xs text-muted mb-0">Retail accounting sheets audit, supply networks, and distribution tracking controls.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- SSS Premium Track: Advanced Technology & Systems Innovation -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed fw-bold text-primary-blue py-4" type="button" data-bs-toggle="collapse" data-bs-target="#sssInnovation" aria-expanded="false">
+                                            <i class="bi bi-code-slash text-dark me-2 fs-5"></i> Digital Technology & Systems Innovation (Senior)
+                                        </button>
+                                    </h2>
+                                    <div id="sssInnovation" class="accordion-collapse collapse" data-bs-parent="#sssAccordion">
+                                        <div class="accordion-body p-4 bg-light bg-opacity-50">
+                                            <p class="small text-muted mb-4">Advanced specialized tech track preparing students for tech ecosystem integration, global software workflows, and premium digital solutions design.</p>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-dark shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Modern UI Frameworks & Layouts</h6>
+                                                        <p class="fs-xs text-muted mb-0">Building luxury, multi-page websites, mastering the Bootstrap grid, custom CSS tokens, and creating highly stylized premium footers or dashboards.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-dark shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">Interactive UI Component Development</h6>
+                                                        <p class="fs-xs text-muted mb-0">Injecting dynamic functionality using scripting languages, state changes, mathematical calculations, and dynamic form inputs.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bg-white p-3 rounded-3 border-start border-4 border-dark shadow-xs h-100">
+                                                        <h6 class="fw-bold mb-1 text-dark">System Portals & Interface Architecture</h6>
+                                                        <p class="fs-xs text-muted mb-0">Structuring multi-role authentication views (Student/Parent/Staff dashboards) and managing analytical reporting system layouts.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+   
+
+            </div>
+    </main>
+
+   
+   <footer class="bg-dark text-white pt-5 pb-3 border-top border-secondary">
+    <div class="container">
+        <div class="row g-4 mb-4">
+            
+            <div class="col-md-5 text-center text-md-start">
+                <h5 class="fw-bold text-uppercase text-warning mb-3">Elysium Academy</h5>
+                <p class="small text-secondary max-width-350">
+                    Providing top-tier holistic education using modern laboratories, interactive tech tracks, and highly specialized mentoring systems.
+                </p>
+            </div>
+
+            <div class="col-md-4 text-center">
+                <h6 class="fw-bold text-uppercase mb-3">Connect With Us</h6>
+                <div class="d-flex justify-content-center gap-3 social-icons-wrapper">
+                    <a href="https://facebook.com" target="_blank" class="social-icon-link facebook" title="Facebook">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-icon-link twitter" title="X (Twitter)">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon-link instagram" title="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon-link linkedin" title="LinkedIn">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-3 text-center text-md-end">
+                <h6 class="fw-bold text-uppercase mb-3">Quick Links</h6>
+                <div class="footer-links d-flex flex-column gap-2">
+                    <a href="index.html" class="text-secondary text-decoration-none small">Home</a>
+                    <a href="aboutus.html" class="text-secondary text-decoration-none small">About Us</a>
+                    <a href="academics.html" class="text-secondary text-decoration-none small">Academics</a>
+                    <a href="admission.html" class="text-secondary text-decoration-none small">Admissions</a>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="border-secondary my-4">
+        
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="small text-secondary mb-0">&copy; 2026 Elysium Academy. All Rights Reserved. BigSasu</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

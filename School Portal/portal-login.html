@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysium Portal Gateway | Elysium Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Product+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        elysiumBlue: '#0A2540',
+                        elysiumGold: '#FFC107',
+                        elysiumLightGold: '#FFF9E6',
+                        elysiumSlate: '#4A5568',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        brand: ['Product Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .portal-bg {
+            background-color: #0A2540;
+            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                              radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(339,49%,30%,0.3) 0, transparent 50%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+        }
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #CBD5E1;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans text-slate-800">
+
+    
+    <!-- LOGIN INTERFACE CONTAINER -->
+    <div id="loginScreen" class="portal-bg min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div class="max-w-md w-full">
+            
+            <!-- Logo Header -->
+            <div class="text-center mb-8">
+                <a href="index.html" class="inline-flex items-center space-x-3 mb-4 group">
+                    <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=80&auto=format&fit=crop&q=60" alt="Elysium Logo" class="w-12 h-12 rounded-full border-2 border-elysiumGold transition duration-300 group-hover:scale-105">
+                    <span class="font-brand font-bold text-2xl tracking-wider uppercase text-white">
+                        <span class="text-elysiumGold">Elysium</span> Academy
+                    </span>
+                </a>
+                <p class="text-slate-300 text-sm">Unified Student, Parent & Applicant Information Gateway</p>
+            </div>
+
+            <!-- Main Login Card -->
+            <div class="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 border border-slate-100">
+                <h2 class="text-xl font-bold text-elysiumBlue mb-2">Welcome to the Portal</h2>
+                <p class="text-xs text-slate-400 mb-6">Select your portal stream and enter your system credentials below.</p>
+
+                <!-- Custom Interactive Stream Selector Tabs -->
+                <div class="grid grid-cols-3 gap-1 p-1 bg-slate-100 rounded-2xl mb-6">
+                    <button type="button" onclick="switchLoginRole('applicant')" id="tab-applicant" class="py-2.5 px-2 text-[10px] sm:text-xs font-bold rounded-xl transition duration-200 bg-white text-elysiumBlue shadow-sm">
+                        <i class="bi bi-person-badge block sm:inline mr-0.5"></i> Parent
+                    </button>
+                    <button type="button" onclick="switchLoginRole('student')" id="tab-student" class="py-2.5 px-2 text-[10px] sm:text-xs font-medium rounded-xl transition duration-200 text-slate-500 hover:text-slate-800">
+                        <i class="bi bi-mortarboard block sm:inline mr-0.5"></i> Student
+                    </button>
+                    <button type="button" onclick="switchLoginRole('staff')" id="tab-staff" class="py-2.5 px-2 text-[10px] sm:text-xs font-medium rounded-xl transition duration-200 text-slate-500 hover:text-slate-800">
+                        <i class="bi bi-briefcase block sm:inline mr-0.5"></i> Staff
+                    </button>
+                </div>
+
+                <form onsubmit="handlePortalLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Portal Access Code / Email</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                            <input type="text" id="loginEmail" required class="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="Enter portal address">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Secure Passcode</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="bi bi-shield-lock"></i>
+                            </span>
+                            <input type="password" id="loginPassword" required class="w-full pl-10 pr-10 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="••••••••">
+                            <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+                                <i id="passwordToggleIcon" class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs py-1">
+                        <label class="flex items-center space-x-2 cursor-pointer text-slate-500">
+                            <input type="checkbox" class="rounded text-elysiumBlue focus:ring-elysiumBlue border-slate-300">
+                            <span>Keep me signed in</span>
+                        </label>
+                        <a href="#" class="text-amber-600 hover:underline font-semibold">Forgot Passcode?</a>
+                    </div>
+
+                    <button type="submit" id="loginSubmitBtn" class="w-full py-3.5 bg-elysiumBlue text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition duration-200 shadow-lg flex items-center justify-center space-x-2">
+                        <span>Sign In Securely</span> <i class="bi bi-box-arrow-in-right"></i>
+                    </button>
+                </form>
+
+                <!-- Quick Credentials Bypass (Aesthetic & highly useful) -->
+                <div class="border-t border-slate-100 pt-6 mt-6">
+                    <p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-3 text-center">Quick-Access Demo Credentials</p>
+                    <div class="grid grid-cols-3 gap-1.5">
+                        <button type="button" onclick="fillDemoCredentials('parent')" class="p-2 border border-slate-100 bg-slate-50 hover:bg-amber-50/50 rounded-xl text-left transition group">
+                            <span class="block text-[10px] font-bold text-slate-700 group-hover:text-amber-800 truncate">Parent</span>
+                            <span class="block text-[9px] text-slate-400 truncate">osondu@elysium</span>
+                        </button>
+                        <button type="button" onclick="fillDemoCredentials('student')" class="p-2 border border-slate-100 bg-slate-50 hover:bg-amber-50/50 rounded-xl text-left transition group">
+                            <span class="block text-[10px] font-bold text-slate-700 group-hover:text-amber-800 truncate">Student</span>
+                            <span class="block text-[9px] text-slate-400 truncate">student@elysium</span>
+                        </button>
+                        <button type="button" onclick="fillDemoCredentials('staff')" class="p-2 border border-slate-100 bg-slate-50 hover:bg-amber-50/50 rounded-xl text-left transition group">
+                            <span class="block text-[10px] font-bold text-slate-700 group-hover:text-amber-800 truncate">Staff</span>
+                            <span class="block text-[9px] text-slate-400 truncate">alao@elysium</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer links -->
+            <div class="text-center mt-6 text-xs text-slate-400 space-x-4">
+                <a href="admission.html" class="hover:text-white transition">Admission guidelines</a>
+                <span>&bull;</span>
+                <a href="admission-apply.html" class="hover:text-white transition">Apply Online</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- DASHBOARD CONTAINER PANEL (Initially Hidden) -->
+    <div id="portalDashboard" class="hidden min-h-screen flex flex-col justify-between">
+        
+        <!-- Header Ribbon -->
+        <header class="bg-elysiumBlue text-white sticky top-0 z-40 shadow-md">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16 sm:h-20">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="toggleMobileSidebar()" class="lg:hidden text-white p-2 hover:bg-slate-800 rounded-xl transition">
+                            <i class="bi bi-list text-2xl"></i>
+                        </button>
+                        <a href="index.html" class="flex items-center space-x-3 group">
+                            <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=80&auto=format&fit=crop&q=60" alt="Elysium Logo" class="w-10 h-10 rounded-full border border-elysiumGold">
+                            <span class="font-brand font-bold text-lg sm:text-xl tracking-wider uppercase">
+                                <span class="text-elysiumGold">Elysium</span> Academy
+                            </span>
+                        </a>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <!-- Stream specific tag -->
+                        <span id="headerStreamTag" class="hidden sm:inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold bg-elysiumLightGold text-amber-700 uppercase tracking-widest">
+                            Parent Portal
+                        </span>
+                        
+                        <!-- Notifications trigger -->
+                        <div class="relative">
+                            <button onclick="triggerNotificationToast('General Portal Maintenance is scheduled for next Saturday at 11:00 PM.')" class="w-10 h-10 rounded-full bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center transition border border-slate-700">
+                                <i class="bi bi-bell"></i>
+                                <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-rose-500 rounded-full"></span>
+                            </button>
+                        </div>
+
+                        <!-- Logout Button -->
+                        <button onclick="handlePortalLogout()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-rose-950 hover:text-rose-200 text-xs font-bold tracking-wider uppercase transition border border-slate-700 flex items-center space-x-1.5">
+                            <i class="bi bi-box-arrow-left"></i>
+                            <span class="hidden sm:inline">Logout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard Split-Grid View -->
+        <div class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                
+                <!-- Left navigation sidebar list (Fixed desktop, Drawer mobile) -->
+                <aside id="dashboardSidebar" class="lg:col-span-1 space-y-3 hidden lg:block">
+                    <div class="bg-white rounded-3xl border border-slate-100 p-4 shadow-sm">
+                        <!-- Quick Profile Card Summary -->
+                        <div class="text-center pb-4 mb-4 border-b border-slate-100">
+                            <div class="w-16 h-16 rounded-full bg-slate-100 mx-auto mb-3 flex items-center justify-center text-slate-400 border border-slate-200 shadow-inner overflow-hidden relative">
+                                <img id="userAvatarImage" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=60" alt="Avatar" class="w-full h-full object-cover">
+                            </div>
+                            <h4 id="userFullName" class="font-bold text-elysiumBlue text-sm">Mr. Jude Osondu</h4>
+                            <p id="userSubRole" class="text-[10px] text-slate-400 mt-0.5">Parent & Applicant Sponsor</p>
+                            <span id="sidebarRefId" class="inline-block text-[10px] text-amber-700 bg-amber-50 font-mono px-2.5 py-1 rounded-md mt-2">EA/26/ADM-9402</span>
+                        </div>
+
+                        <!-- Adaptive Navigation Lists -->
+                        <nav id="sidebarNav" class="space-y-1">
+                            <!-- Populated on switch -->
+                        </nav>
+                    </div>
+
+                    <!-- System alert anchor info card -->
+                    <div class="p-5 rounded-3xl bg-slate-900 text-white relative overflow-hidden shadow-sm">
+                        <div class="absolute -right-8 -bottom-8 w-24 h-24 bg-slate-800 rounded-full opacity-50"></div>
+                        <i class="bi bi-shield-check text-elysiumGold text-2xl mb-2 d-block"></i>
+                        <h6 class="font-bold text-xs mb-1">Encrypted Access Active</h6>
+                        <p class="text-[10px] text-slate-400 leading-relaxed">This secure environment utilizes end-to-end token validation mapping to comply with school privacy controls.</p>
+                    </div>
+                </aside>
+
+
+                <!-- PARENT / APPLICANT WORKSPACE CONTAINER -->
+                <div id="parentWorkspace" class="lg:col-span-3 space-y-8 hidden">
+                    
+                    <!-- Welcome Overview Block -->
+                    <div class="bg-gradient-to-r from-elysiumBlue to-slate-900 text-white rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-md">
+                        <div class="absolute right-0 top-0 w-32 h-32 bg-slate-800 rounded-full opacity-25 -mr-10 -mt-10"></div>
+                        <h2 class="text-xl sm:text-2xl font-bold">Good day, <span class="text-elysiumGold" id="parentDisplayName">Jude</span></h2>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">Check progress on applicant evaluations, upload missed prerequisites, or manage tuition deposits.</p>
+                    </div>
+
+                    <!-- Live Pipeline Status Stepper Checklist -->
+                    <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-3">
+                            <div>
+                                <h3 class="font-bold text-elysiumBlue">Admission Pipeline Tracker</h3>
+                                <p class="text-xs text-slate-400">Current status of: <span class="font-bold text-slate-700">Chidi Benson Osondu</span> (Proposed: <span class="font-bold text-slate-700">JSS1</span>)</p>
+                            </div>
+                            <span class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded-md text-[10px] font-bold uppercase tracking-wider">Evaluation Scheduled</span>
+                        </div>
+
+                        <!-- Timeline representation -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                            
+                            <div class="flex items-start md:flex-col space-x-3 md:space-x-0">
+                                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm font-bold flex-shrink-0 md:mb-3">
+                                    <i class="bi bi-check-lg"></i>
+                                </div>
+                                <div>
+                                    <h6 class="text-xs font-bold text-slate-800 uppercase tracking-wide">1. Document Review</h6>
+                                    <p class="text-[10px] text-slate-400 mt-1">Verified on 22/05/2026</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start md:flex-col space-x-3 md:space-x-0">
+                                <div class="w-8 h-8 rounded-full bg-elysiumBlue text-white flex items-center justify-center text-sm font-bold flex-shrink-0 md:mb-3 ring-4 ring-slate-100">
+                                    2
+                                </div>
+                                <div>
+                                    <h6 class="text-xs font-bold text-elysiumBlue uppercase tracking-wide">2. Aptitude Test</h6>
+                                    <p class="text-[10px] text-slate-500 mt-1">Scheduled: Sat, 27th June</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start md:flex-col space-x-3 md:space-x-0">
+                                <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold flex-shrink-0 md:mb-3">
+                                    3
+                                </div>
+                                <div>
+                                    <h6 class="text-xs font-bold text-slate-400 uppercase tracking-wide">3. Parent Interview</h6>
+                                    <p class="text-[10px] text-slate-400 mt-1">Pending Exam Performance</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start md:flex-col space-x-3 md:space-x-0">
+                                <div class="w-8 h-8 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold flex-shrink-0 md:mb-3">
+                                    4
+                                </div>
+                                <div>
+                                    <h6 class="text-xs font-bold text-slate-400 uppercase tracking-wide">4. Enrollment & Key</h6>
+                                    <p class="text-[10px] text-slate-400 mt-1">Awaiting Decision Board</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Side-by-Side: Downloads Locker and Mock Tuition billing -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- File download desk -->
+                        <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
+                            <h4 class="font-bold text-elysiumBlue mb-4 flex items-center">
+                                <i class="bi bi-folder2-open text-amber-600 mr-2"></i> Documents Locker
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 rounded-2xl border border-slate-100 transition hover:bg-slate-100/50">
+                                    <div class="flex items-center space-x-3 min-w-0">
+                                        <span class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-lg"><i class="bi bi-file-pdf"></i></span>
+                                        <div class="min-w-0">
+                                            <span class="block text-xs font-bold text-slate-800 truncate">Exam_Syllabus_JSS1.pdf</span>
+                                            <span class="block text-[10px] text-slate-400">Preparation guideline - 1.4 MB</span>
+                                        </div>
+                                    </div>
+                                    <button onclick="simulateFileDownload('Exam_Syllabus_JSS1.pdf')" class="w-8 h-8 rounded-lg bg-white border text-slate-500 hover:text-elysiumBlue flex items-center justify-center hover:shadow-xs transition">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 rounded-2xl border border-slate-100 transition hover:bg-slate-100/50">
+                                    <div class="flex items-center space-x-3 min-w-0">
+                                        <span class="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-lg"><i class="bi bi-patch-question"></i></span>
+                                        <div class="min-w-0">
+                                            <span class="block text-xs font-bold text-slate-800 truncate">Practice_Sample_Questions.pdf</span>
+                                            <span class="block text-[10px] text-slate-400">Mock revision booklet - 850 KB</span>
+                                        </div>
+                                    </div>
+                                    <button onclick="simulateFileDownload('Practice_Sample_Questions.pdf')" class="w-8 h-8 rounded-lg bg-white border text-slate-500 hover:text-elysiumBlue flex items-center justify-center hover:shadow-xs transition">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tuition Ledger & Payment -->
+                        <div class="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
+                            <h4 class="font-bold text-elysiumBlue mb-4 flex items-center">
+                                <i class="bi bi-credit-card text-amber-600 mr-2"></i> Financial Billing & Deposits
+                            </h4>
+                            <div class="p-4 bg-amber-50 bg-opacity-40 border border-amber-100 rounded-2xl mb-4 text-xs text-slate-600">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="font-bold text-slate-800">Application Fee & Deposit:</span>
+                                    <span class="font-mono font-bold text-amber-800">₦25,000.00</span>
+                                </div>
+                                <span class="text-[10px] text-slate-400 block leading-normal">Required to confirm and seal the assessment and CBT testing seat allocation slot.</span>
+                            </div>
+
+                            <button onclick="openPaymentGatewayModal()" class="w-full py-3 bg-elysiumBlue text-white hover:bg-slate-800 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-2">
+                                <i class="bi bi-wallet2"></i> <span>Proceed to Secure Deposit</span>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <!-- ENROLLED STUDENT WORKSPACE CONTAINER -->
+                <div id="studentWorkspace" class="lg:col-span-3 space-y-8 hidden">
+                    
+                    <!-- Welcome Header panel -->
+                    <div class="bg-gradient-to-r from-elysiumBlue to-indigo-950 text-white rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-md">
+                        <div class="absolute right-0 top-0 w-32 h-32 bg-slate-800 rounded-full opacity-25 -mr-10 -mt-10"></div>
+                        <h2 class="text-xl sm:text-2xl font-bold">Welcome back, <span class="text-elysiumGold" id="studentDisplayName">Tolu</span></h2>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">Academic Year: 2026 Term 2 &bull; Active Stream: SSS 2 Sciences Track</p>
+                    </div>
+
+                    <!-- Performance statistics grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white rounded-2xl p-4 border border-slate-100 text-center shadow-xs">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Cumulative GPA</span>
+                            <span class="text-xl font-bold text-elysiumBlue block mt-1">4.2 / 5.0</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-slate-100 text-center shadow-xs">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Attendance Rate</span>
+                            <span class="text-xl font-bold text-emerald-600 block mt-1">94.8%</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-slate-100 text-center shadow-xs">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Pending Tasks</span>
+                            <span class="text-xl font-bold text-rose-500 block mt-1" id="pendingTasksCount">3 Tasks</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-slate-100 text-center shadow-xs">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Rank In Stream</span>
+                            <span class="text-xl font-bold text-amber-600 block mt-1">5th / 84</span>
+                        </div>
+                    </div>
+
+                    <!-- Main column grid: Timetable and Assignment Planner -->
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                        
+                        <!-- Daily class timetable list -->
+                        <div class="md:col-span-3 bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <h4 class="font-bold text-elysiumBlue flex items-center">
+                                    <i class="bi bi-calendar3 text-indigo-600 mr-2"></i> Today's Schedule
+                                </h4>
+                                <span class="text-xs text-slate-400">Term 2, Week 6</span>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-slate-200 transition">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 font-bold flex items-center justify-center text-xs">M</span>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-800">Advanced Chemistry</span>
+                                            <span class="block text-[10px] text-slate-400">Lab 3B &bull; Mrs. Alao</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-md">8:30 AM - 10:00 AM</span>
+                                </div>
+
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-slate-200 transition">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 font-bold flex items-center justify-center text-xs">P</span>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-800">Modern Mechanics & Physics</span>
+                                            <span class="block text-[10px] text-slate-400">Class Room 4 &bull; Dr. Okoye</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-md">10:15 AM - 11:45 AM</span>
+                                </div>
+
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-slate-200 transition">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 font-bold flex items-center justify-center text-xs">E</span>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-800">Visual English Rhetoric</span>
+                                            <span class="block text-[10px] text-slate-400">Main Auditorium &bull; Ms. Smith</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded-md">1:00 PM - 2:30 PM</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Assignment task scheduler (Actionable checkboxes) -->
+                        <div class="md:col-span-2 bg-white rounded-3xl border border-slate-100 p-6 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-elysiumBlue mb-4 flex items-center border-b border-slate-100 pb-3">
+                                    <i class="bi bi-clipboard-check text-rose-500 mr-2"></i> Assignment Desk
+                                </h4>
+                                
+                                <div class="space-y-3" id="assignmentListAnchor">
+                                    <label class="flex items-start space-x-3 p-3 bg-slate-50 border rounded-2xl cursor-pointer hover:bg-slate-100/50 transition">
+                                        <input type="checkbox" onchange="toggleAssignmentCompletion(this)" class="w-4 h-4 rounded text-elysiumBlue focus:ring-elysiumBlue border-slate-300 mt-0.5">
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-700">Lab Report: Chemical Equilibrium</span>
+                                            <span class="block text-[10px] text-rose-500 font-medium mt-0.5"><i class="bi bi-clock-history"></i> Due: Friday 12:00 PM</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-start space-x-3 p-3 bg-slate-50 border rounded-2xl cursor-pointer hover:bg-slate-100/50 transition">
+                                        <input type="checkbox" onchange="toggleAssignmentCompletion(this)" class="w-4 h-4 rounded text-elysiumBlue focus:ring-elysiumBlue border-slate-300 mt-0.5">
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-700">Vector Math Practice #4</span>
+                                            <span class="block text-[10px] text-rose-500 font-medium mt-0.5"><i class="bi bi-clock-history"></i> Due: Monday 8:00 AM</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-start space-x-3 p-3 bg-slate-50 border rounded-2xl cursor-pointer hover:bg-slate-100/50 transition">
+                                        <input type="checkbox" onchange="toggleAssignmentCompletion(this)" class="w-4 h-4 rounded text-elysiumBlue focus:ring-elysiumBlue border-slate-300 mt-0.5">
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-700">Creative Reading Summary Essay</span>
+                                            <span class="block text-[10px] text-slate-400 font-medium mt-0.5">Optional Extra Credit</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Trigger prompt -->
+                            <div class="mt-4 pt-3 border-t border-slate-100">
+                                <button onclick="triggerNotificationToast('Missed coursework submissions require formal academic review from your supervisor.')" class="w-full py-2.5 text-[11px] font-bold text-slate-500 hover:text-elysiumBlue bg-slate-100 hover:bg-slate-200 transition rounded-xl">
+                                    <i class="bi bi-plus-circle mr-1"></i> Submit External Homework
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- STAFF / FACULTY WORKSPACE CONTAINER (NEW) -->
+                <div id="staffWorkspace" class="lg:col-span-3 space-y-8 hidden">
+                    
+                    <!-- Welcome Header panel -->
+                    <div class="bg-gradient-to-r from-teal-900 to-elysiumBlue text-white rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-md">
+                        <div class="absolute right-0 top-0 w-32 h-32 bg-slate-800 rounded-full opacity-25 -mr-10 -mt-10"></div>
+                        <h2 class="text-xl sm:text-2xl font-bold">Good day, <span class="text-elysiumGold" id="staffDisplayName">Victoria</span></h2>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">Chemistry Department &bull; Lead Coordinator &bull; Term 2 Track</p>
+                    </div>
+
+                    <!-- Faculty statistics grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white rounded-2xl p-4 border border-slate-100 text-center shadow-xs">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Assigned Classes</span>
+                            <span class="text-xl font-bold text-elysiumBlue block mt-1">3 Classes</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-slate-100 text-center shadow-xs">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Lesson Planners</span>
+                            <span class="text-xl font-bold text-emerald-600 block mt-1">Active</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-slate-100 text-center shadow-xs">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Pending Tasks</span>
+                            <span class="text-xl font-bold text-rose-500 block mt-1">1 Review</span>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 border border-slate-100 text-center shadow-xs">
+                            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Average Term GPA</span>
+                            <span class="text-xl font-bold text-amber-600 block mt-1">3.95 / 5.0</span>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Staff Widgets -->
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                        
+                        <!-- Mini Interactive Attendance Sheet -->
+                        <div class="md:col-span-3 bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
+                            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                                <h4 class="font-bold text-elysiumBlue flex items-center">
+                                    <i class="bi bi-calendar2-check text-teal-600 mr-2"></i> Chemistry Roll Call SSS 2
+                                </h4>
+                                <span class="text-xs text-slate-400">Class Date: Today</span>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-slate-200 transition">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-700">TB</span>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-800">Toluwani Benson</span>
+                                            <span class="block text-[10px] text-slate-400">Chemistry Lead Student</span>
+                                        </div>
+                                    </div>
+                                    <select onchange="triggerNotificationToast('Attendance updated for Toluwani Benson')" class="text-xs border rounded-lg px-2.5 py-1 text-slate-600 focus:ring-1 focus:ring-teal-600 outline-none">
+                                        <option value="present" selected>Present</option>
+                                        <option value="absent">Absent</option>
+                                        <option value="excused">Excused</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-slate-200 transition">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-700">CO</span>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-800">Chidi Benson Osondu</span>
+                                            <span class="block text-[10px] text-slate-400">Applicant/Reviewee JSS1</span>
+                                        </div>
+                                    </div>
+                                    <select onchange="triggerNotificationToast('Attendance updated for Chidi Benson Osondu')" class="text-xs border rounded-lg px-2.5 py-1 text-slate-600 focus:ring-1 focus:ring-teal-600 outline-none">
+                                        <option value="present">Present</option>
+                                        <option value="absent" selected>Absent</option>
+                                        <option value="excused">Excused</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex items-center justify-between p-3.5 bg-slate-50 border border-slate-100 rounded-2xl hover:border-slate-200 transition">
+                                    <div class="flex items-center space-x-3">
+                                        <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-700">AM</span>
+                                        <div>
+                                            <span class="block text-xs font-bold text-slate-800">Amina Musa</span>
+                                            <span class="block text-[10px] text-slate-400">SSS2 Science Track</span>
+                                        </div>
+                                    </div>
+                                    <select onchange="triggerNotificationToast('Attendance updated for Amina Musa')" class="text-xs border rounded-lg px-2.5 py-1 text-slate-600 focus:ring-1 focus:ring-teal-600 outline-none">
+                                        <option value="present" selected>Present</option>
+                                        <option value="absent">Absent</option>
+                                        <option value="excused">Excused</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Class Grade Registrar Input Panel -->
+                        <div class="md:col-span-2 bg-white rounded-3xl border border-slate-100 p-6 shadow-sm flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-elysiumBlue mb-4 flex items-center border-b border-slate-100 pb-3">
+                                    <i class="bi bi-journal-check text-rose-500 mr-2"></i> Grade Registrar SSS2
+                                </h4>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Target Assessment</label>
+                                        <select class="w-full p-2 border rounded-xl text-xs outline-none focus:ring-2 focus:ring-elysiumBlue">
+                                            <option>Continuous Assessment 1 (15 Marks)</option>
+                                            <option>Continuous Assessment 2 (15 Marks)</option>
+                                            <option>Terminal Exam (60 Marks)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Student Candidate</label>
+                                        <select id="gradeStudentName" class="w-full p-2 border rounded-xl text-xs outline-none focus:ring-2 focus:ring-elysiumBlue">
+                                            <option value="Toluwani">Toluwani Benson</option>
+                                            <option value="Amina">Amina Musa</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Score Out of 15</label>
+                                        <input type="number" id="gradeInputScore" placeholder="12" class="w-full px-3 py-2 border rounded-xl text-xs outline-none focus:ring-2 focus:ring-elysiumBlue font-mono">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 pt-3 border-t border-slate-100">
+                                <button onclick="saveStudentGrade()" class="w-full py-2.5 text-xs font-bold text-white hover:bg-emerald-700 bg-emerald-600 transition rounded-xl">
+                                    <i class="bi bi-save mr-1"></i> Save Grade Entry
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- GENERAL PORTABLE NOTIFICATION TOAST -->
+    <div id="generalPortalToast" class="fixed bottom-6 right-6 max-w-sm w-full bg-slate-900 text-white rounded-2xl p-4 shadow-2xl border border-slate-800 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-300 flex items-start space-x-3">
+        <div class="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center text-amber-500 text-lg flex-shrink-0">
+            <i class="bi bi-info-circle-fill"></i>
+        </div>
+        <div class="flex-grow">
+            <h5 class="text-xs font-bold">System Notice</h5>
+            <p id="toastMessageContent" class="text-[10px] text-slate-400 mt-1 leading-normal">Placeholder notifications stream details.</p>
+        </div>
+        <button onclick="dismissNotificationToast()" class="text-slate-400 hover:text-white transition"><i class="bi bi-x-lg text-sm"></i></button>
+    </div>
+
+
+    <!-- SIDEBAR DRAWER PANEL MOBILE OVERLAY -->
+    <div id="mobileSidebarOverlay" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-slate-900 bg-opacity-55 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+
+
+    <!-- SYSTEM MODULE INTERACTION SCRIPTS -->
+    <script>
+        // Core variables to record state
+        let activeRoleStream = 'applicant'; // Toggle stream limits 'applicant', 'student' or 'staff'
+        let dashboardActivated = false;
+
+        // Custom profiles definition to make mock operations fully readable
+        const profiles = {
+            applicant: {
+                fullName: "Mr. Jude Osondu",
+                subRole: "Parent & Applicant Sponsor",
+                refId: "EA/26/ADM-9402",
+                avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=120&auto=format&fit=crop&q=60",
+                sidebarLinks: [
+                    { label: "Application Summary", icon: "bi-layout-text-window-reverse", active: true },
+                    { label: "Documents Locker", icon: "bi-folder2-open" },
+                    { label: "Fees & Payment Desk", icon: "bi-credit-card" },
+                    { label: "Assessment Practice", icon: "bi-journal-bookmark" }
+                ]
+            },
+            student: {
+                fullName: "Toluwani Benson",
+                subRole: "Student • SSS 2 (Sciences)",
+                refId: "EA/23/REG-1102",
+                avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=60",
+                sidebarLinks: [
+                    { label: "Dashboard Desk", icon: "bi-grid-1x2", active: true },
+                    { label: "Live Performance", icon: "bi-graph-up-arrow" },
+                    { label: "Assignment Deck", icon: "bi-clipboard-check" },
+                    { label: "Timetable Schedule", icon: "bi-calendar3" }
+                ]
+            },
+            staff: {
+                fullName: "Mrs. Alao Victoria",
+                subRole: "Senior Tutor • Chemistry & Sciences",
+                refId: "EA/SF/SCI-201",
+                avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=120&auto=format&fit=crop&q=60",
+                sidebarLinks: [
+                    { label: "Faculty Desk", icon: "bi-layout-text-sidebar-reverse", active: true },
+                    { label: "Gradebook Logs", icon: "bi-journal-check" },
+                    { label: "Attendance Sheet", icon: "bi-calendar2-check" },
+                    { label: "Lesson Planners", icon: "bi-book" }
+                ]
+            }
+        };
+
+        // Stream Selector inside login card
+        function switchLoginRole(role) {
+            activeRoleStream = role;
+            const tabApplicant = document.getElementById('tab-applicant');
+            const tabStudent = document.getElementById('tab-student');
+            const tabStaff = document.getElementById('tab-staff');
+
+            if (role === 'applicant') {
+                tabApplicant.className = "py-2.5 px-2 text-[10px] sm:text-xs font-bold rounded-xl transition duration-200 bg-white text-elysiumBlue shadow-sm";
+                tabStudent.className = "py-2.5 px-2 text-[10px] sm:text-xs font-medium rounded-xl transition duration-200 text-slate-500 hover:text-slate-800";
+                tabStaff.className = "py-2.5 px-2 text-[10px] sm:text-xs font-medium rounded-xl transition duration-200 text-slate-500 hover:text-slate-800";
+            } else if (role === 'student') {
+                tabStudent.className = "py-2.5 px-2 text-[10px] sm:text-xs font-bold rounded-xl transition duration-200 bg-white text-elysiumBlue shadow-sm";
+                tabApplicant.className = "py-2.5 px-2 text-[10px] sm:text-xs font-medium rounded-xl transition duration-200 text-slate-500 hover:text-slate-800";
+                tabStaff.className = "py-2.5 px-2 text-[10px] sm:text-xs font-medium rounded-xl transition duration-200 text-slate-500 hover:text-slate-800";
+            } else {
+                tabStaff.className = "py-2.5 px-2 text-[10px] sm:text-xs font-bold rounded-xl transition duration-200 bg-white text-elysiumBlue shadow-sm";
+                tabApplicant.className = "py-2.5 px-2 text-[10px] sm:text-xs font-medium rounded-xl transition duration-200 text-slate-500 hover:text-slate-800";
+                tabStudent.className = "py-2.5 px-2 text-[10px] sm:text-xs font-medium rounded-xl transition duration-200 text-slate-500 hover:text-slate-800";
+            }
+        }
+
+        // Toggle password security view
+        function togglePasswordVisibility() {
+            const pwdInput = document.getElementById('loginPassword');
+            const icon = document.getElementById('passwordToggleIcon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                icon.className = "bi bi-eye-slash";
+            } else {
+                pwdInput.type = 'password';
+                icon.className = "bi bi-eye";
+            }
+        }
+
+        // Auto-fill demo profiles
+        function fillDemoCredentials(role) {
+            const emailInput = document.getElementById('loginEmail');
+            const pwdInput = document.getElementById('loginPassword');
+            
+            if (role === 'parent') {
+                switchLoginRole('applicant');
+                emailInput.value = "osondu@elysium.edu";
+                pwdInput.value = "password123";
+            } else if (role === 'student') {
+                switchLoginRole('student');
+                emailInput.value = "student@elysium.edu";
+                pwdInput.value = "sciencepass";
+            } else {
+                switchLoginRole('staff');
+                emailInput.value = "alao@elysium.edu";
+                pwdInput.value = "staffpass123";
+            }
+        }
+
+        // Login authentication simulator
+        function handlePortalLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const btn = document.getElementById('loginSubmitBtn');
+            
+            // Basic check validation
+            if (!email) return;
+
+            btn.disabled = true;
+            btn.innerHTML = `<span class="inline-flex items-center"><svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Resolving Secure Access...</span>`;
+
+            setTimeout(() => {
+                // Determine layout mapping
+                loadDashboardProfile(activeRoleStream);
+                
+                // Hide Login and transition to Workspace
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('portalDashboard').classList.remove('hidden');
+                
+                dashboardActivated = true;
+                triggerNotificationToast(`Successfully signed in. Unified token mapped to stream.`);
+            }, 1200);
+        }
+
+        // Dynamically load active user configuration properties
+        function loadDashboardProfile(role) {
+            const data = profiles[role];
+            
+            document.getElementById('userFullName').textContent = data.fullName;
+            document.getElementById('userSubRole').textContent = data.subRole;
+            document.getElementById('sidebarRefId').textContent = data.refId;
+            document.getElementById('userAvatarImage').src = data.avatar;
+
+            // Header labels
+            const headerTag = document.getElementById('headerStreamTag');
+            if (role === 'applicant') {
+                headerTag.textContent = "Parent Portal";
+            } else if (role === 'student') {
+                headerTag.textContent = "Student Portal";
+            } else {
+                headerTag.textContent = "Staff Portal";
+            }
+            
+            // Adjust layouts
+            const parentWS = document.getElementById('parentWorkspace');
+            const studentWS = document.getElementById('studentWorkspace');
+            const staffWS = document.getElementById('staffWorkspace');
+            
+            // Hide all first
+            parentWS.classList.add('hidden');
+            studentWS.classList.add('hidden');
+            staffWS.classList.add('hidden');
+
+            if (role === 'applicant') {
+                parentWS.classList.remove('hidden');
+                document.getElementById('parentDisplayName').textContent = "Jude";
+            } else if (role === 'student') {
+                studentWS.classList.remove('hidden');
+                document.getElementById('studentDisplayName').textContent = "Tolu";
+                recalculateAssignmentsCount();
+            } else {
+                staffWS.classList.remove('hidden');
+                document.getElementById('staffDisplayName').textContent = "Victoria";
+            }
+
+            // Populate Sidebar navigation dynamically
+            const navAnchor = document.getElementById('sidebarNav');
+            navAnchor.innerHTML = '';
+            data.sidebarLinks.forEach(link => {
+                const btn = document.createElement('button');
+                btn.className = link.active 
+                    ? "w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold flex items-center bg-elysiumLightGold text-amber-700 hover:bg-opacity-90 transition duration-150"
+                    : "w-full text-left px-4 py-2.5 rounded-xl text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-50 flex items-center transition duration-150";
+                
+                btn.innerHTML = `<i class="bi ${link.icon} mr-2.5 text-base"></i> ${link.label}`;
+                navAnchor.appendChild(btn);
+            });
+        }
+
+        // Save mock student grade details
+        function saveStudentGrade() {
+            const student = document.getElementById('gradeStudentName').value;
+            const score = document.getElementById('gradeInputScore').value.trim();
+            if (!score) {
+                triggerNotificationToast('Please input a valid test score registrar parameter first.');
+                return;
+            }
+            triggerNotificationToast(`Saved mark of [${score}/15] to registry for student candidate: ${student}`);
+        }
+
+        // Logout handler
+        function handlePortalLogout() {
+            // Restore submission state mapping
+            const btn = document.getElementById('loginSubmitBtn');
+            btn.disabled = false;
+            btn.innerHTML = `<span>Sign In Securely</span> <i class="bi bi-box-arrow-in-right"></i>`;
+            
+            document.getElementById('portalDashboard').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
+            dashboardActivated = false;
+        }
+
+        // Mobile drawer panel toggle controls
+        function toggleMobileSidebar() {
+            const sidebar = document.getElementById('dashboardSidebar');
+            const overlay = document.getElementById('mobileSidebarOverlay');
+            
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden', 'lg:block');
+                sidebar.className = "fixed left-4 top-20 z-50 w-[240px] space-y-3";
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+                sidebar.className = "lg:col-span-1 space-y-3 hidden lg:block";
+                overlay.classList.add('hidden');
+            }
+        }
+
+        // Handle Checklist Assignment completion and state updating
+        function toggleAssignmentCompletion(checkbox) {
+            const itemText = checkbox.nextElementSibling.querySelector('span');
+            if (checkbox.checked) {
+                itemText.classList.add('line-through', 'text-slate-400');
+            } else {
+                itemText.classList.remove('line-through', 'text-slate-400');
+            }
+            recalculateAssignmentsCount();
+        }
+
+        // Track and compute live pending checklist counts
+        function recalculateAssignmentsCount() {
+            const list = document.getElementById('assignmentListAnchor');
+            const totalPending = list.querySelectorAll('input[type="checkbox"]:not(:checked)').length;
+            const counter = document.getElementById('pendingTasksCount');
+            if(counter) {
+                counter.textContent = `${totalPending} ${totalPending === 1 ? 'Task' : 'Tasks'}`;
+            }
+        }
+
+        // Simulate secure file download mechanism
+        function simulateFileDownload(fileName) {
+            triggerNotificationToast(`Starting secure transfer: ${fileName}`);
+        }
+
+        // Open secure tuition modal
+        function openPaymentGatewayModal() {
+            const modal = document.getElementById('paymentGatewayModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.querySelector('div').classList.remove('scale-95');
+            }, 50);
+        }
+
+        function closePaymentGatewayModal() {
+            const modal = document.getElementById('paymentGatewayModal');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 150);
+        }
+
+        // Simulate billing transactions safely
+        function simulateMockPayment() {
+            const payBtn = document.getElementById('paySubmitButton');
+            payBtn.disabled = true;
+            payBtn.innerHTML = `<span class="inline-flex items-center"><svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Processing Payment...</span>`;
+
+            setTimeout(() => {
+                closePaymentGatewayModal();
+                triggerNotificationToast("Transaction processed successfully! Receipt code EA-903-8812 emailed.");
+                // Restore button state
+                payBtn.disabled = false;
+                payBtn.innerHTML = "Complete Secure Deposit";
+            }, 1800);
+        }
+
+        // Toast controller mechanics
+        let toastTimeout = null;
+        function triggerNotificationToast(message) {
+            const toast = document.getElementById('generalPortalToast');
+            const content = document.getElementById('toastMessageContent');
+            
+            content.textContent = message;
+            
+            // Animate In
+            toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                dismissNotificationToast();
+            }, 4000);
+        }
+
+        function dismissNotificationToast() {
+            const toast = document.getElementById('generalPortalToast');
+            toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+        }
+    </script>
+</body>
+</html>

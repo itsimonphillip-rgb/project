@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Admission Wizard | Elysium Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap Icons for modern iconography -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Google Sans and Inter Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Product+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        elysiumBlue: '#0A2540',
+                        elysiumGold: '#FFC107',
+                        elysiumLightGold: '#FFF9E6',
+                        elysiumSlate: '#4A5568',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        brand: ['Product Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #CBD5E1;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans flex flex-col justify-between">
+
+    <!-- Brand Navigation Bar -->
+    <nav class="bg-elysiumBlue text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <a href="index.html" class="flex items-center space-x-3 group">
+                    <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=80&auto=format&fit=crop&q=60" alt="Elysium Logo" class="w-10 h-10 rounded-full border border-elysiumGold transition duration-300 group-hover:scale-105">
+                    <span class="font-brand font-bold text-lg sm:text-xl tracking-wider uppercase">
+                        <span class="text-elysiumGold">Elysium</span> Academy
+                    </span>
+                </a>
+                <div class="flex items-center space-x-4">
+                    <span class="hidden sm:inline-block text-xs uppercase tracking-widest text-slate-300">Admission Portal</span>
+                    <a href="admission.html" class="text-sm text-slate-300 hover:text-white transition flex items-center space-x-1">
+                        <i class="bi bi-arrow-left"></i>
+                        <span>Cancel Application</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Form Wizard Workspace -->
+    <main class="flex-grow py-8 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Context Sub-Header Info Banner -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 p-6 mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:y-0">
+                <div>
+                    <h1 class="text-2xl font-bold text-elysiumBlue">Admission Application Wizard</h1>
+                    <p class="text-sm text-slate-500 mt-1">2026/2027 Academic Year &bull; Registered Class Stream Options Available</p>
+                </div>
+                <div>
+                    <span class="inline-flex items-center px-4 py-2 rounded-full text-xs font-bold bg-elysiumLightGold text-amber-700 uppercase tracking-wider">
+                        <i class="bi bi-clock-history mr-1.5 text-sm"></i> Est. Time: 8 Mins
+                    </span>
+                </div>
+            </div>
+
+            <!-- STEP INDICATOR TRACKER -->
+            <div class="mb-8 px-4">
+                <div class="relative flex items-center justify-between w-full">
+                    <!-- Progress Bar Line Background -->
+                    <div class="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-1 bg-slate-200 -z-10 rounded-full"></div>
+                    <!-- Running Active Progress Bar Line -->
+                    <div id="wizardProgressBar" class="absolute left-0 top-1/2 -translate-y-1/2 h-1 bg-elysiumGold -z-10 rounded-full transition-all duration-500" style="width: 0%;"></div>
+                    
+                    <!-- Step 1 Circle Indicator -->
+                    <div onclick="navigateToStep(1)" class="cursor-pointer flex flex-col items-center">
+                        <div id="stepDot-1" class="w-10 h-10 rounded-full bg-elysiumBlue text-white font-bold flex items-center justify-content-center border-4 border-white shadow-sm transition duration-300 flex items-center justify-center">1</div>
+                        <span id="stepLabel-1" class="text-[10px] sm:text-xs font-bold text-elysiumBlue mt-2 uppercase tracking-wide">Student Bio</span>
+                    </div>
+
+                    <!-- Step 2 Circle Indicator -->
+                    <div onclick="navigateToStep(2)" class="cursor-pointer flex flex-col items-center">
+                        <div id="stepDot-2" class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 font-bold flex items-center justify-content-center border-4 border-white shadow-sm transition duration-300 flex items-center justify-center">2</div>
+                        <span id="stepLabel-2" class="text-[10px] sm:text-xs font-medium text-slate-400 mt-2 uppercase tracking-wide font-sans">Parental Contact</span>
+                    </div>
+
+                    <!-- Step 3 Circle Indicator -->
+                    <div onclick="navigateToStep(3)" class="cursor-pointer flex flex-col items-center">
+                        <div id="stepDot-3" class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 font-bold flex items-center justify-content-center border-4 border-white shadow-sm transition duration-300 flex items-center justify-center">3</div>
+                        <span id="stepLabel-3" class="text-[10px] sm:text-xs font-medium text-slate-400 mt-2 uppercase tracking-wide font-sans">Academics</span>
+                    </div>
+
+                    <!-- Step 4 Circle Indicator -->
+                    <div onclick="navigateToStep(4)" class="cursor-pointer flex flex-col items-center">
+                        <div id="stepDot-4" class="w-10 h-10 rounded-full bg-slate-200 text-slate-500 font-bold flex items-center justify-content-center border-4 border-white shadow-sm transition duration-300 flex items-center justify-center">4</div>
+                        <span id="stepLabel-4" class="text-[10px] sm:text-xs font-medium text-slate-400 mt-2 uppercase tracking-wide font-sans">Uploads / Submit</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORM WIZARD CONTAINER CARDS -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
+                <form id="admissionsForm" onsubmit="handleFormSubmission(event)" class="p-6 sm:p-10">
+                    
+                    <!-- ================= STEP 1: Student Demographics ================= -->
+                    <div id="stepSection-1" class="step-transition">
+                        <div class="border-b border-slate-100 pb-4 mb-6">
+                            <h3 class="text-lg font-bold text-elysiumBlue flex items-center">
+                                <span class="bg-elysiumLightGold text-amber-600 w-8 h-8 rounded-lg inline-flex items-center justify-center mr-2.5 text-base">
+                                    <i class="bi bi-person-bounding-box"></i>
+                                </span>
+                                Student Bio Information
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Please enter all student primary registration parameters exactly as shown on their birth certificates.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">First Name <span class="text-rose-500">*</span></label>
+                                <input type="text" id="stuFirstName" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="e.g., Chidi">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Middle Name</label>
+                                <input type="text" id="stuMiddleName" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="e.g., Benson">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Surname <span class="text-rose-500">*</span></label>
+                                <input type="text" id="stuSurname" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="e.g., Osondu">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Date of Birth <span class="text-rose-500">*</span></label>
+                                <input type="date" id="stuDob" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none text-slate-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Gender <span class="text-rose-500">*</span></label>
+                                <select id="stuGender" required class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none text-slate-500">
+                                    <option value="" disabled selected>Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Target Class Level <span class="text-rose-500">*</span></label>
+                                <select id="stuLevel" required onchange="handleLevelChange(this.value)" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none text-slate-500">
+                                    <option value="" disabled selected>Select Proposed Class</option>
+                                    <option value="JSS1">Junior Secondary School 1 (JSS 1)</option>
+                                    <option value="JSS2">Junior Secondary School 2 (JSS 2)</option>
+                                    <option value="JSS3">Junior Secondary School 3 (JSS 3)</option>
+                                    <option value="SSS1">Senior Secondary School 1 (SSS 1)</option>
+                                    <option value="SSS2">Senior Secondary School 2 (SSS 2)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================= STEP 2: Parent/Guardian Info ================= -->
+                    <div id="stepSection-2" class="step-transition hidden">
+                        <div class="border-b border-slate-100 pb-4 mb-6">
+                            <h3 class="text-lg font-bold text-elysiumBlue flex items-center">
+                                <span class="bg-elysiumLightGold text-amber-600 w-8 h-8 rounded-lg inline-flex items-center justify-center mr-2.5 text-base">
+                                    <i class="bi bi-people"></i>
+                                </span>
+                                Parent / Guardian Information
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Provide clear operational contact directories. All administrative alerts and exam details are routed through these channels.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Parent / Guardian Full Name <span class="text-rose-500">*</span></label>
+                                <input type="text" id="parentName" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="e.g., Mr. Jude Osondu">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Relationship to Applicant <span class="text-rose-500">*</span></label>
+                                <input type="text" id="parentRelation" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="e.g., Father, Mother, Uncle">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Active Phone Number <span class="text-rose-500">*</span></label>
+                                <input type="tel" id="parentPhone" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="e.g., +234 803 123 4567">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Email Address <span class="text-rose-500">*</span></label>
+                                <input type="email" id="parentEmail" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="parent@example.com">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Residential Address <span class="text-rose-500">*</span></label>
+                                <textarea id="parentAddress" rows="2" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none" placeholder="Full street address layout, state, city"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================= STEP 3: Educational Specialty Streams ================= -->
+                    <div id="stepSection-3" class="step-transition hidden">
+                        <div class="border-b border-slate-100 pb-4 mb-6">
+                            <h3 class="text-lg font-bold text-elysiumBlue flex items-center">
+                                <span class="bg-elysiumLightGold text-amber-600 w-8 h-8 rounded-lg inline-flex items-center justify-center mr-2.5 text-base">
+                                    <i class="bi bi-award"></i>
+                                </span>
+                                Educational Specialty & Trade Tracks
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Design the child's academic specialization and functional tech tracks to match institutional guidelines.</p>
+                        </div>
+
+                        <!-- CONDITIONAL INTERACTIVE NOTIFICATION -->
+                        <div class="mb-6 p-4 rounded-2xl bg-slate-50 border border-slate-100 text-xs text-slate-500 flex items-start space-x-3">
+                            <i class="bi bi-info-circle-fill text-elysiumBlue text-base flex-shrink-0"></i>
+                            <div>
+                                <span class="font-bold text-elysiumBlue block mb-0.5">NERDC Regulation Compliance Notice:</span>
+                                All applicants must be mapped into active national specialties. Secondary tracks also mandate selecting exactly one practical trade subject and one specialized tech track option.
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Section Specialty (Only shown if student is in Senior SSS1-2) -->
+                            <div id="seniorSpecialtyArea" class="hidden">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Core Specialty Track <span class="text-rose-500">*</span></label>
+                                <select id="sssSpecialty" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none text-slate-500">
+                                    <option value="" disabled selected>Select SSS Track</option>
+                                    <option value="Sciences">Science & Mathematics Track</option>
+                                    <option value="Arts">Humanities & Creative Arts</option>
+                                    <option value="Commercial">Commercial & Business Specialization</option>
+                                </select>
+                            </div>
+
+                            <!-- Trade Subject Selection (Cross-cutting SSS vocational options) -->
+                            <div id="tradeSubjectArea" class="hidden">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Vocational Trade Elective <span class="text-rose-500">*</span></label>
+                                <select id="sssTrade" class="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-elysiumBlue focus:border-elysiumBlue text-sm transition outline-none text-slate-500">
+                                    <option value="" disabled selected>Select Vocational Option</option>
+                                    <option value="Catering">Catering Craft Practice</option>
+                                    <option value="Marketing">Marketing & Distribution</option>
+                                    <option value="Bookkeeping">Bookkeeping & Financial Sheets</option>
+                                    <option value="Garment">Garment Making & Pattern Drafting</option>
+                                </select>
+                            </div>
+
+                            <!-- Junior Specialty Context Info (Shown only if JSS) -->
+                            <div id="juniorSpecialtyArea" class="md:col-span-2 p-4 rounded-2xl bg-amber-50 bg-opacity-50 border border-amber-100 text-xs text-amber-800">
+                                <h6 class="font-bold mb-1"><i class="bi bi-shield-check mr-1 text-sm"></i> JSS Unified Basic Education Track Activated</h6>
+                                <p class="opacity-90">Junior Secondary students follow the standardized General UBE Framework, including basic science, computing studies, civic foundations, and pre-vocational practices.</p>
+                            </div>
+
+                            <!-- Premium Digital Tech Track Option (Compulsory for both SSS/JSS but different scopes) -->
+                            <div class="md:col-span-2 border-t border-slate-100 pt-6 mt-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Specialized Tech & Creative Track <span class="text-rose-500">*</span></label>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    
+                                    <label class="relative flex flex-col p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-slate-300 transition focus-within:ring-2 focus-within:ring-elysiumBlue">
+                                        <input type="radio" name="techTrack" value="WebDev" class="sr-only" checked onclick="selectTechCard('techDev')">
+                                        <div id="techDev" class="flex flex-col h-full justify-between">
+                                            <div class="flex items-center justify-between mb-3">
+                                                <span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm"><i class="bi bi-code-slash"></i></span>
+                                                <i class="bi bi-check-circle-fill text-elysiumBlue text-base hidden tech-check"></i>
+                                            </div>
+                                            <h6 class="text-sm font-bold text-slate-800 mb-1">Web Dev & Systems</h6>
+                                            <p class="text-[11px] text-slate-500 leading-relaxed">HTML, CSS, custom frameworks, responsive design and layouts coding.</p>
+                                        </div>
+                                    </label>
+
+                                    <label class="relative flex flex-col p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-slate-300 transition focus-within:ring-2 focus-within:ring-elysiumBlue">
+                                        <input type="radio" name="techTrack" value="Logic" class="sr-only" onclick="selectTechCard('techLogic')">
+                                        <div id="techLogic" class="flex flex-col h-full justify-between">
+                                            <div class="flex items-center justify-between mb-3">
+                                                <span class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-sm"><i class="bi bi-cpu"></i></span>
+                                                <i class="bi bi-check-circle-fill text-elysiumBlue text-base hidden tech-check"></i>
+                                            </div>
+                                            <h6 class="text-sm font-bold text-slate-800 mb-1">Algorithmic Logic</h6>
+                                            <p class="text-[11px] text-slate-500 leading-relaxed">Flow diagrams, block programming, conditional loops, variables and scripts.</p>
+                                        </div>
+                                    </label>
+
+                                    <label class="relative flex flex-col p-4 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-slate-300 transition focus-within:ring-2 focus-within:ring-elysiumBlue">
+                                        <input type="radio" name="techTrack" value="Branding" class="sr-only" onclick="selectTechCard('techBrand')">
+                                        <div id="techBrand" class="flex flex-col h-full justify-between">
+                                            <div class="flex items-center justify-between mb-3">
+                                                <span class="w-8 h-8 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center text-sm"><i class="bi bi-brush"></i></span>
+                                                <i class="bi bi-check-circle-fill text-elysiumBlue text-base hidden tech-check"></i>
+                                            </div>
+                                            <h6 class="text-sm font-bold text-slate-800 mb-1">Visual Branding / Logo</h6>
+                                            <p class="text-[11px] text-slate-500 leading-relaxed">Color balancing metrics, typography scaling, vectors and vector illustrations.</p>
+                                        </div>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ================= STEP 4: Documents Upload & Review ================= -->
+                    <div id="stepSection-4" class="step-transition hidden">
+                        <div class="border-b border-slate-100 pb-4 mb-6">
+                            <h3 class="text-lg font-bold text-elysiumBlue flex items-center">
+                                <span class="bg-elysiumLightGold text-amber-600 w-8 h-8 rounded-lg inline-flex items-center justify-center mr-2.5 text-base">
+                                    <i class="bi bi-cloud-arrow-up"></i>
+                                </span>
+                                Document Uploads & Declaration
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Please attach clear scanned photocopies of essential documents to support the registration process.</p>
+                        </div>
+
+                        <!-- Dropzone Scans Panel -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            
+                            <!-- Passport Photo Attachment -->
+                            <div class="p-5 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50 text-center flex flex-col items-center justify-center hover:border-elysiumGold transition relative">
+                                <i class="bi bi-image text-slate-400 text-3xl mb-2"></i>
+                                <h6 class="text-sm font-bold text-slate-800 mb-1">Passport Photograph <span class="text-rose-500">*</span></h6>
+                                <p class="text-[11px] text-slate-500 mb-3">JPG, PNG files up to 2MB allowed.</p>
+                                <label class="cursor-pointer bg-white border px-4 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 shadow-xs transition">
+                                    Select Image
+                                    <input type="file" id="passportFile" required onchange="handleFileSelected(this, 'passportStatus')" class="sr-only" accept="image/*">
+                                </label>
+                                <div id="passportStatus" class="hidden text-xs text-emerald-600 mt-2 font-bold flex items-center">
+                                    <i class="bi bi-check-circle-fill mr-1 text-sm"></i> Attached successfully
+                                </div>
+                            </div>
+
+                            <!-- Birth Certificate Attachment -->
+                            <div class="p-5 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50 text-center flex flex-col items-center justify-center hover:border-elysiumGold transition relative">
+                                <i class="bi bi-file-earmark-pdf text-slate-400 text-3xl mb-2"></i>
+                                <h6 class="text-sm font-bold text-slate-800 mb-1">Birth Certificate <span class="text-rose-500">*</span></h6>
+                                <p class="text-[11px] text-slate-500 mb-3">PDF, JPG, PNG files up to 5MB allowed.</p>
+                                <label class="cursor-pointer bg-white border px-4 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 shadow-xs transition">
+                                    Select Document
+                                    <input type="file" id="birthCertFile" required onchange="handleFileSelected(this, 'birthCertStatus')" class="sr-only" accept=".pdf,image/*">
+                                </label>
+                                <div id="birthCertStatus" class="hidden text-xs text-emerald-600 mt-2 font-bold flex items-center">
+                                    <i class="bi bi-check-circle-fill mr-1 text-sm"></i> Attached successfully
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Formal Attestation Declaration -->
+                        <div class="border-t border-slate-100 pt-6 mb-6">
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" id="attestCheckbox" required class="w-5 h-5 rounded text-elysiumBlue focus:ring-elysiumBlue border-slate-300 mt-0.5">
+                                <span class="text-xs text-slate-500 leading-relaxed">
+                                    I hereby declare that all information given in this enrollment portal is precise and correct to the best of my knowledge. I understand that uploading false or forged credentials will result in instant cancellation of applicant status.
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- STEPPERS NAVIGATION PANELS -->
+                    <div class="border-t border-slate-100 pt-6 flex justify-between items-center mt-8">
+                        <button type="button" id="prevBtn" onclick="navigateStep(-1)" class="px-5 py-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-50 shadow-xs transition disabled:opacity-30 disabled:pointer-events-none" disabled>
+                            <i class="bi bi-arrow-left mr-1.5"></i> Back
+                        </button>
+                        
+                        <button type="button" id="nextBtn" onclick="navigateStep(1)" class="px-6 py-3 bg-elysiumBlue text-white rounded-xl text-sm font-bold hover:bg-slate-800 transition shadow-sm flex items-center space-x-1">
+                            <span>Continue</span>
+                            <i class="bi bi-arrow-right ml-1.5"></i>
+                        </button>
+                        
+                        <button type="submit" id="submitBtn" class="px-8 py-3 bg-elysiumGold text-slate-900 rounded-xl text-sm font-bold hover:bg-amber-400 transition shadow-sm uppercase tracking-wider hidden">
+                            Submit Application
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- SUCCESS MODAL SCREEN (Triggered dynamically) -->
+    <div id="successModal" class="fixed inset-0 bg-slate-900 bg-opacity-70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl border border-slate-100 transform scale-95 transition-all duration-300">
+            <!-- Animated Custom Success Mark -->
+            <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl mb-5 border border-emerald-100">
+                <i class="bi bi-patch-check-fill"></i>
+            </div>
+            
+            <h3 class="text-xl font-bold text-elysiumBlue mb-2">Application Submitted!</h3>
+            <p class="text-slate-500 text-xs leading-relaxed mb-6">
+                Your admission documentation has been securely transmitted. An entrance assessment code and administrative guidelines are being prepared for delivery to your specified email.
+            </p>
+            
+            <div class="border-t border-slate-100 pt-4 mb-6 flex justify-between text-[11px] text-slate-500">
+                <span>Ref Number:</span>
+                <span class="font-bold text-slate-800">EA/2026/ADM-9402</span>
+            </div>
+
+            <div class="space-y-3">
+                <a href="index.html" class="block w-full py-2.5 bg-elysiumBlue text-white text-xs font-bold rounded-xl hover:bg-slate-800 transition">
+                    Return to Homepage
+                </a>
+                <a href="portal-login.html" class="block w-full py-2.5 border text-slate-600 text-xs font-bold rounded-xl hover:bg-slate-50 transition">
+                    Access Portal Login
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Corporate Shared Footing -->
+    <footer class="bg-elysiumBlue text-white border-t border-slate-800 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xs text-slate-400">&copy; 2026 Elysium Central Portal. Under universal structural governance parameters.</p>
+        </div>
+    </footer>
+
+    <!-- WIZARD STEPPERS CONTROLS SCRIPT -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        // Ensure active loading elements render correctly on window load
+        window.addEventListener('load', () => {
+            updateProgressBar();
+            selectTechCard('techDev'); // Select default tech track
+        });
+
+        // Track level alteration to handle NERDC specific fields
+        function handleLevelChange(value) {
+            const seniorSpecialty = document.getElementById('seniorSpecialtyArea');
+            const tradeSubject = document.getElementById('tradeSubjectArea');
+            const juniorSpecialty = document.getElementById('juniorSecondaryArea');
+
+            if (value === 'SSS1' || value === 'SSS2') {
+                seniorSpecialty.classList.remove('hidden');
+                tradeSubject.classList.remove('hidden');
+                juniorSpecialty.classList.add('hidden');
+                // Ensure inputs become required
+                document.getElementById('sssSpecialty').setAttribute('required', 'required');
+                document.getElementById('sssTrade').setAttribute('required', 'required');
+            } else {
+                seniorSpecialty.classList.add('hidden');
+                tradeSubject.classList.add('hidden');
+                juniorSpecialty.classList.remove('hidden');
+                // Remove required flags
+                document.getElementById('sssSpecialty').removeAttribute('required');
+                document.getElementById('sssTrade').removeAttribute('required');
+            }
+        }
+
+        // Handle File uploading simulation and update statuses
+        function handleFileSelected(inputElement, statusId) {
+            const statusBox = document.getElementById(statusId);
+            if(inputElement.files.length > 0) {
+                statusBox.classList.remove('hidden');
+                inputElement.closest('div').classList.add('border-emerald-500', 'bg-emerald-50/20');
+            }
+        }
+
+        // Select the tech specialization card layouts
+        function selectTechCard(activeId) {
+            const cards = ['techDev', 'techLogic', 'techBrand'];
+            cards.forEach(card => {
+                const element = document.getElementById(card);
+                const checkIcon = element.querySelector('.tech-check');
+                if (card === activeId) {
+                    element.closest('label').classList.add('border-elysiumBlue', 'bg-slate-50');
+                    checkIcon.classList.remove('hidden');
+                } else {
+                    element.closest('label').classList.remove('border-elysiumBlue', 'bg-slate-50');
+                    checkIcon.classList.add('hidden');
+                }
+            });
+        }
+
+        // Validate the active step before transitioning
+        function validateStep(step) {
+            if (step === 1) {
+                return document.getElementById('stuFirstName').value.trim() !== '' &&
+                       document.getElementById('stuSurname').value.trim() !== '' &&
+                       document.getElementById('stuDob').value !== '' &&
+                       document.getElementById('stuGender').value !== '' &&
+                       document.getElementById('stuLevel').value !== '';
+            }
+            if (step === 2) {
+                return document.getElementById('parentName').value.trim() !== '' &&
+                       document.getElementById('parentRelation').value.trim() !== '' &&
+                       document.getElementById('parentPhone').value.trim() !== '' &&
+                       document.getElementById('parentEmail').value.trim() !== '' &&
+                       document.getElementById('parentAddress').value.trim() !== '';
+            }
+            if (step === 3) {
+                const stuLevel = document.getElementById('stuLevel').value;
+                if (stuLevel === 'SSS1' || stuLevel === 'SSS2') {
+                    return document.getElementById('sssSpecialty').value !== '' &&
+                           document.getElementById('sssTrade').value !== '';
+                }
+                return true;
+            }
+            return true;
+        }
+
+        // Navigation controls
+        function navigateStep(direction) {
+            // If going forward, run validation checks on active step
+            if(direction === 1 && !validateStep(currentStep)) {
+                // Focus/Highlight validation issues
+                alert("Please fill in all mandatory fields with valid parameters before continuing.");
+                return;
+            }
+
+            const newStep = currentStep + direction;
+            if(newStep >= 1 && newStep <= totalSteps) {
+                navigateToStep(newStep);
+            }
+        }
+
+        function navigateToStep(targetStep) {
+            // Prevent forward jumps without valid active parameters
+            if (targetStep > currentStep && !validateStep(currentStep)) {
+                return;
+            }
+
+            // Hide existing view section
+            document.getElementById(`stepSection-${currentStep}`).classList.add('hidden');
+            // Show target section
+            document.getElementById(`stepSection-${targetStep}`).classList.remove('hidden');
+
+            currentStep = targetStep;
+            updateStepIndicators();
+            updateProgressBar();
+        }
+
+        function updateStepIndicators() {
+            for(let i = 1; i <= totalSteps; i++) {
+                const dot = document.getElementById(`stepDot-${i}`);
+                const label = document.getElementById(`stepLabel-${i}`);
+
+                if(i < currentStep) {
+                    // Complete state
+                    dot.className = "w-10 h-10 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center border-4 border-white shadow-sm transition duration-300";
+                    dot.innerHTML = `<i class="bi bi-check-lg"></i>`;
+                    label.className = "text-[10px] sm:text-xs font-bold text-emerald-600 mt-2 uppercase tracking-wide";
+                } else if(i === currentStep) {
+                    // Current step state
+                    dot.className = "w-10 h-10 rounded-full bg-elysiumBlue text-white font-bold flex items-center justify-center border-4 border-white shadow-sm transition duration-300";
+                    dot.innerHTML = i;
+                    label.className = "text-[10px] sm:text-xs font-bold text-elysiumBlue mt-2 uppercase tracking-wide";
+                } else {
+                    // Pending state
+                    dot.className = "w-10 h-10 rounded-full bg-slate-200 text-slate-500 font-bold flex items-center justify-center border-4 border-white shadow-sm transition duration-300";
+                    dot.innerHTML = i;
+                    label.className = "text-[10px] sm:text-xs font-medium text-slate-400 mt-2 uppercase tracking-wide";
+                }
+            }
+
+            // Configure button layout limits
+            document.getElementById('prevBtn').disabled = (currentStep === 1);
+            
+            if(currentStep === totalSteps) {
+                document.getElementById('nextBtn').classList.add('hidden');
+                document.getElementById('submitBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('nextBtn').classList.remove('hidden');
+                document.getElementById('submitBtn').classList.add('hidden');
+            }
+        }
+
+        function updateProgressBar() {
+            const barWidthPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('wizardProgressBar').style.width = `${barWidthPercentage}%`;
+        }
+
+        // Final form handling submission simulation
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            
+            // Check files and validation rules
+            const attestation = document.getElementById('attestCheckbox').checked;
+            if(!attestation) {
+                alert("Please review and check the declaration attestation parameter before submitting.");
+                return;
+            }
+
+            // Run a mock visual delay
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="inline-flex items-center"><svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Transmitting Securely...</span>`;
+
+            setTimeout(() => {
+                // Pop the success visual overlay screen
+                const modal = document.getElementById('successModal');
+                modal.classList.remove('hidden');
+                // Scale in animation trigger
+                setTimeout(() => {
+                    modal.querySelector('div').classList.remove('scale-95');
+                }, 50);
+            }, 1800);
+        }
+    </script>
+</body>
+</html>

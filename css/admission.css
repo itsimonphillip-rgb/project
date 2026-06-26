@@ -1,0 +1,202 @@
+    /* Custom Google Fonts */
+    /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'); */
+
+    :root {
+        --primary-blue: #0a2540;   /* Trusted, academic deep navy blue */
+        --accent-gold: #ffc107;    /* Warm gold color */
+        --text-dark: #2d3748;      /* Deep gray for readable body text */
+        --light-bg: #f8f9fa;       /* Off-white background */
+    }
+
+    body {
+        font-family:  "Trajan Pro", sans-serif;
+        color: var(--text-dark);
+        background-color: #ffffff;
+        overflow-x: hidden;
+    }
+
+    /* Custom Navigation Styling Override */
+
+    /* Logo Styling */
+    .logo-img {
+        height: 40px;          /* Restricts the height to keep the navbar elegant */
+        width: 40px;           /* Keeps it a clean 1:1 square ratio */
+        object-fit: cover;     /* Prevents the image from stretching weirdly */
+        border-radius: 8px;    /* Gives it slightly soft, modern rounded corners */
+        border: 2px solid var(--accent-gold); /* Adds a premium gold border ring */
+    }
+    .navbar {
+        background-color: var(--primary-blue) !important;
+        padding: 15px 0;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-brand {
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+    }
+
+    .nav-link {
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin: 0 5px;
+        transition: color 0.3s ease;
+    }
+
+    .nav-link:hover, 
+    .nav-link.active {
+        color: var(--accent-gold) !important;
+    }
+
+    /* Portal Login Button Custom Transitions */
+    .btn-warning {
+        background-color: var(--accent-gold);
+        border: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+    }
+
+    /* Smooth Scrolling for Sections */
+    html {
+        scroll-behavior: smooth;
+    }
+
+
+    /* Admission Page Custom Elements */
+.admission-header-bg {
+    background: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=1200&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+    position: relative;
+       padding-top: 20px;
+}
+
+/* --- Admission Page Hero Background --- */
+/* .admission-header-bg {
+    background: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1200&auto=format&fit=crop') no-repeat center center;
+    background-size: cover;
+} */
+
+.page-header-overlay{
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.776), rgba(10, 37, 64, 0.5));
+    z-index: 2;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-blue);
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border: 4px solid #f8f9fa;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.admission-list li {
+    font-size: 0.95rem;
+    color: #4a5568;
+    display: flex;
+    align-items: flex-start;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(10, 37, 64, 0.05);
+    color: var(--primary-blue);
+}
+
+
+/* Contact and Footer Form Custom Overrides */
+.custom-input {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+/* Add an elegant glowing focus effect to match our school colors */
+.custom-input:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(10, 37, 64, 0.15);
+    outline: none;
+}
+
+.contact-info-block {
+    background-color: var(--primary-blue) !important;
+}
+
+.text-white-50 {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.max-width-350 {
+    max-width: 350px;
+    display: inline-block;
+}
+
+/* Footer Links Hover Transitions */
+.footer-links a {
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-gold) !important;
+}
+
+/* Footer Social Media Icons Styling */
+.social-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #a0aec0; /* Subdued gray icon color */
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-decoration: none;
+}
+
+/* Micro-interaction layout: lift icon and color change on hover */
+.social-icon-link:hover {
+    transform: translateY(-5px);
+    color: #ffffff !important;
+}
+
+/* Dynamic Brand Colors for each network */
+.social-icon-link.facebook:hover {
+    background-color: #1877f2;
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4);
+}
+
+.social-icon-link.twitter:hover {
+    background-color: #000000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.social-icon-link.instagram:hover {
+    background-color: #e1306c;
+    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.4);
+}
+
+.social-icon-link.linkedin:hover {
+    background-color: #0077b5;
+    box-shadow: 0 4px 12px rgba(0, 119, 181, 0.4);
+}
+  
