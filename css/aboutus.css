@@ -268,4 +268,154 @@
     background-color: #0077b5;
     box-shadow: 0 4px 12px rgba(0, 119, 181, 0.4);
 }
+
+/* Laptop / Large Tablets Viewports */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: var(--primary-blue);
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .hero-section {
+        min-height: 70vh;
+        /* Disable fixed position on mobile to save hardware processing lag */
+        background-attachment: scroll !important; 
+    }
+
+    .features-section {
+        margin-top: -30px;
+    }
+
+    .academic-img-wrapper img {
+        height: 190px;
+    }
+}
+
+/* Medium Tablets (Landscape & Portrait Boundaries) */
+@media (max-width: 767.98px) {
+    body {
+        font-size: 15px;
+    }
+
+    .hero-section {
+        min-height: auto;
+        padding-top: 100px;
+        padding-bottom: 100px;
+        background-attachment: scroll !important;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-subtitle {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Standardize card margins without negative overlaps */
+    .features-section {
+        margin-top: 0;
+        padding-top: 30px !important;
+    }
+
+    .about-img-frame {
+        max-width: 450px;
+        margin: 0 auto;
+    }
+
+    .about-accent-box {
+        bottom: -10px;
+        right: -10px;
+        border-width: 4px;
+    }
+
+    /* Convert Timeline to a clean, left-aligned, single vertical list */
+    .timeline-center-line {
+        left: 20px;
+        transform: none;
+    }
+
+    .timeline-row {
+        margin-bottom: 40px !important;
+    }
+
+    .timeline-row > div {
+        text-align: left !important;
+    }
+
+    /* Make sure badge aligns accurately with left vertical guide line */
+    .timeline-badge {
+        left: -2px !important;
+        right: auto !important;
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+    }
+
+    .timeline-row .position-relative {
+        padding-left: 55px !important;
+        padding-right: 0 !important;
+    }
+
+    /* Enable smooth scroll/drag for curriculum tabs to prevent squishing layout */
+    #curriculumLevelTabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+        display: flex;
+    }
+
+    #curriculumLevelTabs .nav-item {
+        flex: 0 0 auto;
+    }
+}
+
+/* Portrait Mobile Devices / Small Screen Viewports */
+@media (max-width: 575.98px) {
+    h1, .hero-title {
+        font-size: 2.2rem !important;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.15rem;
+    }
+
+    .logo-img {
+        height: 36px;
+        width: 36px;
+    }
+
+    .academic-img-wrapper img {
+        height: 170px;
+    }
+
+    /* Stack buttons beautifully on small screens */
+    .hero-content .d-flex, 
+    .hero-content .mt-4 {
+        display: flex;
+        flex-direction: column;
+        gap: 12px !important;
+    }
+
+    .hero-content .btn {
+        width: 100%;
+        margin-right: 0 !important;
+        padding: 12px 20px !important;
+    }
+    
+    .team-img {
+        width: 100px;
+        height: 100px;
+    }
+}
   
