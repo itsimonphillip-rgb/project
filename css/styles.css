@@ -437,6 +437,130 @@ background-attachment: scroll;
 
 }
 
+/* index respomsiveness */
+
+/* Medium Tablets & Mobile Landscape viewports */
+@media (max-width: 767.98px) {
+.hero-section {
+min-height: auto;
+padding-top: 80px;
+padding-bottom: 80px;
+background-attachment: scroll;
+}
+
+.hero-content {
+    text-align: center;
+    padding: 0 15px;
+}
+
+.hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Remove the card overlap entirely on mobile to let elements flow safely */
+.features-section {
+    margin-top: 0;
+    padding-top: 40px !important;
+}
+
+.about-img-frame {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.about-accent-box {
+    bottom: -8px;
+    right: -8px;
+    border-width: 3px; /* Cleaner frame line on mobile devices */
+}
+
+/* Prevent tabs wrapping awkwardly. Instead, allow horizontal swiping. */
+#curriculumLevelTabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    display: flex;
+}
+
+#curriculumLevelTabs .nav-item {
+    flex: 0 0 auto;
+}
+
+.custom-input {
+    padding: 10px;
+}
+
+
+}
+
+/* Tiny Mobile Viewports (Smartphones in portrait) */
+@media (max-width: 575.98px) {
+h1, .hero-title {
+font-size: 2.1rem !important;
+line-height: 1.25;
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+}
+
+.navbar-brand {
+    font-size: 1.1rem;
+}
+
+.logo-img {
+    height: 35px;
+    width: 35px;
+}
+
+.academic-img-wrapper img {
+    height: 160px; /* Slimmer image footprint */
+}
+
+/* Stack buttons nicely in Hero */
+.hero-content .d-flex {
+    flex-direction: column;
+    gap: 12px !important;
+}
+
+.hero-content .btn {
+    width: 100%;
+    margin-right: 0 !important;
+}
+
+
+}
+
+
+/* curriculum responsiveness */
+
+/* Large Tablets / Laptops in portrait mode */
+@media (max-width: 991.98px) {
+.hero-section {
+min-height: 70vh;
+/* Mobile web rendering systems perform poorly with fixed backgrounds; reset to default */
+background-attachment: scroll;
+}
+
+.hero-content {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.features-section {
+    margin-top: -30px; /* Bring the card pull-up down slightly to prevent clipping titles */
+}
+
+.academic-img-wrapper img {
+    height: 180px; /* Adjust height to match tablet grid column aspect */
+}
+
+}
+
+
 /* Medium Tablets & Mobile Landscape viewports */
 @media (max-width: 767.98px) {
 .hero-section {
